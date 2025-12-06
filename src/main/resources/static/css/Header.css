@@ -1,0 +1,158 @@
+/* 메인 헤더 - 입체감과 고정 효과 */
+header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 80px;
+    background-color: #FFFFFF;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08); /* 그림자를 조금 더 깊고 부드럽게 */
+    position: sticky; top: 0; 
+    z-index: 1000;
+    /* 성능 개선: 스크롤 시 깜빡임을 줄이기 위해 will-change 추가 */
+    will-change: transform; 
+}
+
+/* 로고 섹션 - 폰트와 색상 강조 */
+.header-left h1 {
+    font-size: 1.8rem;
+    color: #FF7043;
+    font-weight: 700; 
+    margin: 0; 
+    letter-spacing: -0.5px;
+    /* 로고 텍스트에 부드러운 애니메이션 추가 */
+    transition: color 0.3s ease;
+}
+.header-left a:hover h1 {
+    color: #E64A19; /* 호버 시 약간 더 어두운 오렌지 */
+}
+.header-left a { text-decoration: none; }
+
+.header-left .logo-link-content {
+    display: flex;
+    align-items: center; /* 수직 중앙 정렬 */
+    gap: 5px; /* 아이콘과 텍스트 사이 간격 */
+}
+/* 중앙 네비게이션 - 깔끔한 캡슐형 버튼 */
+.header-center {
+    display: flex; justify-content: center; align-items: center;
+    gap: 25px;
+    flex: 1;
+}
+.header-center a {
+    padding: 8px 16px; 
+    border-radius: 20px; 
+    font-size: 15px;
+    color: #555;
+    transition: all 0.3s ease; 
+    position: relative;
+    text-decoration: none; /* a 태그 기본 밑줄 방지 */
+    /* 아이콘과 텍스트가 붙지 않도록 간격 조정 */
+    display: flex; align-items: center; 
+}
+.header-center a i {
+    margin-right: 6px; /* 아이콘과 텍스트 사이 간격 */
+    font-size: 1.1em; /* 아이콘 크기 살짝 키움 */
+}
+
+.header-center a:hover { 
+    color: #FF7043;
+}
+.header-center a.active {
+    font-weight: 600;
+    color: #FF7043;
+    /* 밑줄 애니메이션 스타일 유지 */
+    border-bottom: 3px solid #FF7043; 
+    padding-bottom: 5px;
+    background: none;
+}
+
+/* 우측 아이콘 및 메뉴 - 정렬 및 통일성 */
+.header-right { 
+    display: flex; align-items: center; gap: 20px;
+}
+.header-right a { text-decoration: none; } /* 쪽지함 링크 밑줄 제거 */
+
+.header-right i {
+    font-size: 1.4rem; /* 아이콘 크기 미세 조정 */
+    cursor: pointer; 
+    color: #757575; 
+    transition: color 0.2s ease, transform 0.2s ease; /* transform 추가 */
+}
+.header-right i:hover { 
+    color: #4CAF50;
+    transform: translateY(-2px); /* 호버 시 살짝 떠오르는 효과 */
+}
+
+/* 💡 추가: 쪽지함 아이콘에 알림/카운트 표시를 위한 Relative 설정 */
+.message-box-icon {
+    position: relative;
+    display: flex; /* i 태그를 감싸는 a 태그도 flex로 정렬 */
+    align-items: center;
+}
+
+/* 드롭다운 메뉴 - 전문적인 느낌으로 (스크롤 시 고정) */
+.login-menu {
+    position: fixed; /* 스크롤과 상관없이 화면에 고정 */
+    top: 80px;
+    right: 80px;
+    background-color: white; 
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* 그림자를 조금 더 강조 */
+    /* 기존 max-height/transition 유지 */
+    overflow: hidden; /* transition을 위해 필수 */
+    max-height: 0;
+    padding: 0;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out, box-shadow 0.3s ease;
+    z-index: 1001; /* 헤더보다 위에 표시 */
+}
+.login-menu.show { 
+    max-height: 400px; 
+    padding: 12px 0; 
+}
+/* 드롭다운 내부 버튼 및 텍스트 스타일 통일 */
+.login-menu button, .login-menu p {
+    padding: 12px 30px;
+    font-size: 15px; 
+    width: 100%;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.2s;
+    margin: 0; /* 폼 내부 margin 제거 */
+}
+
+/* 드롭다운 버튼 호버 */
+.login-menu button:hover {
+    background-color: #F5F5F5;
+    color: #FF7043;
+}
+
+.login-menu p {
+    color: #FF7043;
+    font-weight: 600; /* 사용자 이름 강조 */
+    border-bottom: 1px solid #eee; 
+    margin-bottom: 5px !important;
+}
+/* 💡 추가: 관리자/레시피 등록 버튼 색상 차별화 (선택 사항) */
+.login-menu button.admin-btn {
+    color: #4CAF50; /* 보조 색상 (녹색) 사용 */
+}
+.login-menu button.admin-btn:hover {
+    background-color: #E8F5E9; /* 녹색 연한 배경 */
+    color: #2E7D32;
+}
+
+/* 미디어 쿼리 (반응형) */
+@media (max-width: 992px) {
+    header { padding: 15px 40px; }
+    .header-center { gap: 15px; }
+}
+
+@media (max-width: 768px) {
+    /* 모바일에서는 중앙 메뉴 제거 */
+    .header-center { display: none; } 
+    header { padding: 10px 20px; }
+    .login-menu { 
+        top: 65px; /* 헤더가 얇아졌으므로 높이 조정 */
+        right: 20px; 
+    }
+}
